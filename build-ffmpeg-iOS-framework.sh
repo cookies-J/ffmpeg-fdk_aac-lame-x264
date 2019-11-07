@@ -24,13 +24,13 @@ OUTPUT_MODULES_FILE="$OUTPUT_MODULES_FOLDER/module.modulemap"
 VERSION_NEW_NAME="Version.h"
 BUNDLE_ID="org.ffmpeg.FFmpeg"
 
-#FDK_AAC="fdk-aac-iOS"
-#X264="x264-iOS"
-#LAME="lame-iOS"
+FDK_AAC="fdk-aac-iOS"
+X264="x264-iOS"
+LAME="lame-iOS"
 
-FDK_AAC="fdk-aac"
-X264="x264"
-LAME="lame"
+#FDK_AAC="fdk-aac"
+#X264="x264"
+#LAME="lame"
 
 function CompileExternal() {
     if [ ! -r $FDK_AAC ]
@@ -48,10 +48,10 @@ function CompileExternal() {
 }
 
 function CleanFFmpegBuildFile() {
-    rm -rf $BUILD_THIN_FOLDER $BUILD_FOLDER $SCRATCH $OUTPUT_FOLDER
+    rm -rf $BUILD_THIN_FOLDER $BUILD_FOLDER $SCRATCH $OUTPUT_FOLDER $OUTPUT_FOLDER "ffmpeg-$FFMPEG_VERSION"
 }
+
 function CreateFramework() {
-  rm -rf $OUTPUT_FOLDER
   mkdir -p $OUTPUT_HEADER_FOLDER $OUTPUT_MODULES_FOLDER
 }
 
