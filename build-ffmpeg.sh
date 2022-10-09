@@ -46,35 +46,37 @@ CONFIGURE_FLAGS="--disable-everything \
 --enable-fft \
 --enable-version3  \
 --enable-nonfree   \
---disable-filters  \
---enable-filter=aresample \
 --disable-postproc \
---disable-bsfs \
---enable-bsf=aac_adtstoasc,h264_mp4toannexb,x265 \
---disable-encoders \
---enable-encoder=pcm_s16le,h264,aac,libmp3lame,hls,x265 \
---disable-decoders \
---enable-decoder=h264,aac,mp3,hls,x265 \
---disable-parsers  \
---enable-parser=h264,aac,mp3,x265 \
---disable-muxers   \
---enable-muxer=flv,mov,mpegts,hls,x265 \
---disable-demuxers \
---enable-demuxer=flv,mov,mpegts,h264,aac,mp3,live_flv,hls,x265 \
---disable-protocols    \
---enable-protocol=file,rtmp,pipe,hls,http,https \
---enable-hwaccels \
---disable-audiotoolbox \
---enable-autodetect
+--enable-autodetect \
 --disable-manpages \
 --disable-htmlpages \
 --disable-podpages \
 --disable-txtpages \
---enable-asm --enable-yasm \
---enable-x86asm \
-"
-
-
+--disable-protocols \
+--enable-demuxer=flv,mov,mpegts,h264,aac,mp3,live_flv,hls,x265,flac \
+--enable-decoder=h264,aac,mp3,hls,x265,flac \
+--enable-protocol=file,rtmp,pipe,hls,http,https \
+--disable-audiotoolbox"
+#--disable-filters  \
+#--enable-filter=aresample \
+#--disable-bsfs \
+#--enable-bsf=aac_adtstoasc,h264_mp4toannexb,x265 \
+#--disable-encoders \
+#--enable-encoder=pcm_s16le,h264,aac,libmp3lame,hls,x265 \
+#--disable-decoders \
+#--enable-decoder=h264,aac,mp3,hls,x265 \
+#--disable-parsers  \
+#--enable-parser=h264,aac,mp3,x265 \
+#--disable-muxers   \
+#--enable-muxer=flv,mov,mpegts,hls,x265 \
+#--disable-demuxers \
+#--enable-demuxer=flv,mov,mpegts,h264,aac,mp3,live_flv,hls,x265 \
+#--disable-protocols    \
+#--enable-protocol=file,rtmp,pipe,hls,http,https \
+#--enable-hwaccels \
+#--disable-audiotoolbox \
+#--enable-asm --enable-yasm \
+#--enable-x86asm \
 #CONFIGURE_FLAGS="--enable-cross-compile \
 #--enable-debug \
 #--disable-programs \
@@ -148,25 +150,7 @@ CONFIGURE_FLAGS="--disable-everything \
 #--disable-filters  \
 #--enable-filter=aresample \
 
-if [ "$X264" ]
-then
-	CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-gpl --enable-libx264 --enable-encoder=libx264 --enable-decoder=libx264"
-fi
 
-if [ "$X265" ]
-then
-    CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-gpl --enable-libx265 --enable-encoder=libx265 --enable-decoder=libx265"
-fi
-
-if [ "$FDK_AAC" ]
-then
-	CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-libfdk-aac --enable-nonfree --enable-encoder=libfdk_aac --enable-decoder=libfdk_aac"
-fi
-
-if [ "$LAME" ]
-then
-    CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-libmp3lame --enable-encoder=libmp3lame"
-fi
 
 # avresample
 #CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-avresample"
@@ -194,7 +178,27 @@ then
 	fi
 fi
 
-
+function add_plug() {
+    if [ "$X264" ]
+    then
+    CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-gpl --enable-libx264 --enable-encoder=libx264 --enable-decoder=libx264"
+    fi
+    
+    if [ "$X265" ]
+    then
+    CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-gpl --enable-libx265 --enable-encoder=libx265 --enable-decoder=libx265"
+    fi
+    
+    if [ "$FDK_AAC" ]
+    then
+    CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-libfdk-aac --enable-nonfree --enable-encoder=libfdk_aac --enable-decoder=libfdk_aac"
+    fi
+    
+    if [ "$LAME" ]
+    then
+    CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-libmp3lame --enable-encoder=libmp3lame"
+    fi
+}
 
 function Compile_exec() {
 	if [ ! `which yasm` ]
@@ -330,7 +334,7 @@ function Lipo_exec() {
 	cp -rf $THIN/$1/include $FAT
  echo 'Bye~~~~~'
 }
-
+add_plug
 Compile_exec
 Lipo_exec
 

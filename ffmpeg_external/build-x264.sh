@@ -66,7 +66,7 @@ then
     
     if [ ! -r "$CWD/ffmpeg_external/build_source/$SOURCE" ]
     then
-        echo 'x264 source not found. Trying to download...'
+        echo 'x264 source not found. Trying to download... to $CWD/ffmpeg_external/build_source/$SOURCE'
         (curl https://code.videolan.org/videolan/x264/-/archive/master/x264-master.tar.bz2 -o "$CWD/ffmpeg_external/build_source/$SOURCE.tar.bz2" \
         && tar xf "$CWD/ffmpeg_external/build_source/$SOURCE.tar.bz2" -C "$CWD/ffmpeg_external/build_source/") \
             || exit 1
@@ -78,7 +78,6 @@ then
         mkdir -p "$SCRATCH/$ARCH"
         cd "$SCRATCH/$ARCH"
         CFLAGS="-arch $ARCH"
-                ASFLAGS=
 
         if [ "$ARCH" = "i386" -o "$ARCH" = "x86_64" ]
         then
@@ -86,10 +85,11 @@ then
             CPU=
             if [ "$ARCH" = "x86_64" ]
             then
-                CFLAGS="$CFLAGS -mios-simulator-version-min=9.3"
-                HOST=
+                CFLAGS="$CFLAGS -mios-simulator-version-min=7.0"
+                CONFIGURE_FLAGS="$CONFIGURE_FLAGS --disable-asm"
+            HOST="--host=x86_64-apple-darwin"
             else
-                CFLAGS="$CFLAGS -mios-simulator-version-min=9.3"
+                CFLAGS="$CFLAGS -mios-simulator-version-min=7.0"
             HOST="--host=i386-apple-darwin"
             fi
         else
