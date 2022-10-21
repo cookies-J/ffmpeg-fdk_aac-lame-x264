@@ -53,10 +53,12 @@ CONFIGURE_FLAGS="--disable-everything \
 --disable-podpages \
 --disable-txtpages \
 --disable-protocols \
---enable-demuxer=flv,mov,mpegts,h264,aac,mp3,live_flv,hls,x265,flac \
---enable-decoder=h264,aac,mp3,hls,x265,flac \
+--enable-demuxer=flv,mov,mpegts,h264,aac,mp3,live_flv,hls,x265,flac,webm_dash_manifest,hevc,mkv,matroska,ac3 \
+--enable-decoder=h264,aac,mp3,hls,x265,flac,vp9,hevc,mkv,matroska,ac3    \
 --enable-protocol=file,rtmp,pipe,hls,http,https \
---disable-audiotoolbox"
+--disable-audiotoolbox \
+--enable-hwaccels"
+
 #--disable-filters  \
 #--enable-filter=aresample \
 #--disable-bsfs \
