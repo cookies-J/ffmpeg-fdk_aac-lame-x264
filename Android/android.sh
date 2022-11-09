@@ -159,7 +159,7 @@ build_all() {
     COMMON_OPTIONS="$COMMON_OPTIONS --disable-ffplay"    # disable ffplay build
     COMMON_OPTIONS="$COMMON_OPTIONS --disable-ffprobe"   # disable ffprobe build
     COMMON_OPTIONS="$COMMON_OPTIONS --disable-symver"
-    COMMON_OPTIONS="$COMMON_OPTIONS --disable-network"
+#    COMMON_OPTIONS="$COMMON_OPTIONS --disable-network"
     COMMON_OPTIONS="$COMMON_OPTIONS --disable-x86asm"
     COMMON_OPTIONS="$COMMON_OPTIONS --disable-asm"
     #启用
