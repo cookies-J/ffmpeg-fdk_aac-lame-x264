@@ -17,9 +17,10 @@
 #CC="$TOOL_PREFIX$API-clang"
 #CXX="$TOOL_PREFIX$API-clang++"
 # 用于编译android平台的脚本
+HOME=`echo ~/`
 
 # NDK所在目录
-NDK_PATH=/Users/jele//Library/Android/sdk/ndk/23.1.7779620 # tag1
+NDK_PATH="$HOME/Library/Android/sdk/ndk/23.1.7779620" # tag1
 # macOS 平台编译，其他平台看一下 $NDK_PATH/toolchains/llvm/prebuilt/ 下的文件夹名称
 HOST_PLATFORM=darwin-x86_64  #tag1
 # minSdkVersion
@@ -159,7 +160,7 @@ build_all() {
     COMMON_OPTIONS="$COMMON_OPTIONS --disable-ffplay"    # disable ffplay build
     COMMON_OPTIONS="$COMMON_OPTIONS --disable-ffprobe"   # disable ffprobe build
     COMMON_OPTIONS="$COMMON_OPTIONS --disable-symver"
-    COMMON_OPTIONS="$COMMON_OPTIONS --disable-network"
+#    COMMON_OPTIONS="$COMMON_OPTIONS --disable-network"
     COMMON_OPTIONS="$COMMON_OPTIONS --disable-x86asm"
     COMMON_OPTIONS="$COMMON_OPTIONS --disable-asm"
     #启用
