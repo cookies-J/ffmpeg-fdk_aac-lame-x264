@@ -32,11 +32,13 @@ LAME=`pwd`/$BUILDED_PATH/lame-iOS
 CONFIGURE_FLAGS="--disable-everything \
 --enable-cross-compile
 --enable-pic \
---enable-static --disable-stripping \
+--enable-static \
+--disable-stripping \
+--disable-optimizations \
 --disable-ffmpeg --disable-ffplay --disable-ffprobe --disable-programs \
 --enable-indevs \
 --enable-outdevs \
---enable-debug \
+--enable-debug=3 \
 --enable-small \
 --enable-dct \
 --enable-dwt \
@@ -86,7 +88,9 @@ CONFIGURE_FLAGS="--disable-everything \
 --enable-protocol=http \
 --enable-protocol=https \
 --disable-audiotoolbox \
---enable-hwaccels"
+--enable-hwaccels \
+--enable-parsers \
+--enable-bsfs"
 
 #--disable-filters  \
 #--enable-filter=aresample \
@@ -186,7 +190,7 @@ CONFIGURE_FLAGS="--disable-everything \
 # avresample
 #CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-avresample"
 
-ARCHS="arm64 armv7s armv7 x86_64"
+ARCHS="arm64 x86_64"
 
 COMPILE="y"
 LIPO="y"

@@ -3,7 +3,7 @@ BUILDED_PATH="enjoy_it!!"
 
 # directories
 SCRATCH=`pwd`/"scratch"
-ARCHS="arm64 armv7s armv7 x86_64"
+ARCHS="arm64 x86_64"
 
 FFMPEG_VERSION="4.4"
 export FFMPEG_VERSION
